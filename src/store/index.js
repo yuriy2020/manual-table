@@ -28,9 +28,9 @@ class Store {
 
   preparedData = (rawData) => {
     let arr = []
-    rawData.map((elem) => {
+    rawData.forEach((elem) => {
       let obj = { key: elem.id }
-      const e = [...store.columns].map((col) => {
+      store.columns.forEach((col) => {
         let value
         if (typeof elem[col.dataIndex] === 'string' || typeof elem[col.dataIndex] === 'number') {
           value = elem[col.dataIndex]
