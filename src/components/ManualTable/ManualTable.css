@@ -1,0 +1,39 @@
+.table {
+  display: table;
+  width: 100%;
+  text-align: left;
+  border-radius: 2px 2px 0 0;
+  border-collapse: separate;
+  border-spacing: 0;
+  padding: 8px;
+}
+
+.thead {
+  display: table-header-group;
+  vertical-align: middle;
+  border-color: #333;
+  background: #d3eaff;
+}
+
+.tbody {
+  display: table-row-group;
+  vertical-align: middle;
+  border-color: inherit;
+}
+
+.tr {
+  display: table-row;
+  vertical-align: inherit;
+  border-color: inherit;
+}
+
+.th {
+  padding: 8px 8px;
+}
+.td {
+  padding: 8px 8px;
+}
+
+.center{
+text-align: center;
+}
