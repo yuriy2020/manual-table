@@ -44,7 +44,8 @@ export const TableGrid = observer(() => {
         dataSource={mock_data}
         size='small'
       /> */}
-      <ManualTable columns={store.columns} data={mock_data}/>
+      <ManualTable columns={store.columns} data={mock_data} select />
     </>
   )
 })
+ 

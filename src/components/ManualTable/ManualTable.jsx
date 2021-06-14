@@ -2,14 +2,17 @@ import { Row } from 'antd'
 import React from 'react'
 import './ManualTable.css'
 
-const ManualTable = (props) => {
-  const { columns, data } = props
+const ManualTable = ({ columns, data, select }) => {
+  if (select) {
+    columns = [{ title: '[x]', dataIndex: '#chbx' }, ...columns]
+  }
+  console.log(columns)
 
   return (
     <table className='table'>
       <thead className='thead'>
         <tr className='tr'>
-          <th className={['th red'].join(' ')}>[x]</th>
+          {/* <th className={['th'].join(' ')}>[x]</th> */}
           {columns.map((col) => {
             return <th className='th'>{col.title}</th>
           })}
@@ -21,10 +24,10 @@ const ManualTable = (props) => {
           if (typeof row === 'object' && Object.keys(row).length) {
             return (
               <tr className='tr' key={row.id || idx}>
-                {Object.entries(row).map(([key, value]) => {
+                {columns.map((col, idx) => {
                   return (
-                    <td className='td' key={key}>
-                      {value}/{key}
+                    <td className='td' key={idx}>
+                      {col.dataIndex === '#chbx' ? '[v]' : row[col.dataIndex]}
                     </td>
                   )
                 })}

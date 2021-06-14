@@ -6,6 +6,7 @@ class Store {
   data = []
   dataSource = []
   columns = [
+    { title: 'ID', dataIndex: 'id' },
     { title: 'Наименование', dataIndex: 'name' },
     { title: 'Описание', dataIndex: 'description' },
     { title: 'Дата Создания', dataIndex: 'dateCreated' },

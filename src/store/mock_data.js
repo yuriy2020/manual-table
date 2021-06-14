@@ -1,3 +1,4 @@
+
 export const mock_data = [
   {
 
@@ -12,8 +13,7 @@ export const mock_data = [
   {
     id: 2,
     name: 'Cecilius',
-    description:
-      'Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque. Duis bibendum. Morbi non quam nec dui luctus rutrum.',
+    
     dateCreated: '1/24/2021',
     incidentStatus: false,
     incidentRelevance: 'Ford',
