@@ -48,15 +48,20 @@ text-align: center;
 .resizer{
 position: absolute;
 right: 0;
-top: 0;
-bottom: 0;
-width: 1px;
-height: 100%;
+top: 10px;
+bottom: 10px;
+width: 2px;
 background: #bbb;
+/* bottom:0 */
 }
 
 .resizer:hover{
-  width: 2px;
-  background: darkblue;
-  cursor:col-resize
+  width: 3px;
+  background: rgb(110, 110, 110);
+  cursor:col-resize;
+  bottom:-5000px;
+}
+
+.tbody .tr:hover{
+  background:cornsilk
 }

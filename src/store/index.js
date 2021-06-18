@@ -19,14 +19,6 @@ class Store {
     makeAutoObservable(this)
   }
 
-  increment = () => {
-    console.log('>>', this.count)
-    this.count = this.count + 1
-  }
-  decrement = () => {
-    this.count = this.count - 1
-  }
-
   preparedData = (rawData) => {
     let arr = []
     rawData.forEach((elem) => {
