@@ -1,33 +1,46 @@
+:root {
+  --resizer-width: 20px;
+  --resizer-string: 1px;
+}
+
 .table {
   display: table;
   width: 100%;
   text-align: left;
-  border-radius: 2px 2px 0 0;
-  /* border-collapse: separate; */
   border-spacing: 0;
-  
 }
 
 .thead {
-    display: table-header-group;
-    vertical-align: middle;
-    background: #fafafa;
-    border-radius: 12px;
-    border-bottom:1px solid #bbb; 
-    /* border-color: #333; */
+  display: table-header-group;
+  vertical-align: middle;
+  background: #fafafa;
+ 
+}
+/* .thead .tr{
+  border:1px solid #bbb;
+} */
+.thead .th:first-child{
+  border-radius:2px 0 0 0;
 }
 
 .tbody {
-    display: table-row-group;
-    vertical-align: middle;
-    border-color: inherit;
+  display: table-row-group;
+  vertical-align: middle;
+  border-color: inherit;
 }
 
 .tr {
-    display: table-row;
-    vertical-align: inherit;
-    border-color: inherit;
+  display: table-row;
+  vertical-align: inherit;
+  border-color: inherit;
 }
+/* 
+.tr .th {
+  border-right: 1px solid rgb(106, 0, 245);
+  border-left: 1px solid rgb(106, 0, 245);
+  border-top: 1px solid rgb(106, 0, 245);
+  border-bottom: 1px solid rgb(106, 0, 245);
+} */
 
 .th {
   padding: 8px 8px;
@@ -36,32 +49,38 @@
   padding: 8px 8px;
 }
 
-.center{
-text-align: center;
+.center {
+  text-align: center;
 }
 
-.resizable{
-  position:relative;
-
+.resizable {
+  position: relative;
 }
 
-.resizer{
-position: absolute;
-right: 0;
-top: 10px;
-bottom: 10px;
-width: 2px;
-background: #bbb;
-/* bottom:0 */
+.resizer {
+  position: absolute;
+  width: var(--resizer-width);
+  /* right   == --resize-width /(-2) + (resize-string)   ==>> 14 /(-2)-2px */
+  right: -11px;
+  background: transparent;
+  top: 10px;
+  bottom: 10px;
+  z-index: 5;
 }
 
-.resizer:hover{
-  width: 3px;
-  background: rgb(110, 110, 110);
-  cursor:col-resize;
-  bottom:-5000px;
+.resizer:hover {
+  cursor: col-resize;
+  bottom: -5000px;
 }
 
-.tbody .tr:hover{
-  background:cornsilk
+.tbody .tr:hover {
+  background: cornsilk;
+}
+
+.inresizer {
+  position: absolute;
+  right: calc(var(--resizer-width) / 2);
+  height: 100%;
+  width:1px;
+  background: #bbb;
 }

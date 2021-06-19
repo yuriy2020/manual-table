@@ -1,10 +1,10 @@
 import { makeAutoObservable } from 'mobx'
 import { fetched } from '../utils/fetched'
-
+import { preparedData}  from '../utils/helpers'
 class Store {
   count = 3
-  data = []
-  dataSource = []
+  data = []  // raw data from server
+  dataSource = []  // converted data
   columns = [
     { title: 'ID', dataIndex: 'id' },
     { title: 'Наименование', dataIndex: 'name' },
@@ -19,25 +19,6 @@ class Store {
     makeAutoObservable(this)
   }
 
-  preparedData = (rawData) => {
-    let arr = []
-    rawData.forEach((elem) => {
-      let obj = { key: elem.id }
-      store.columns.forEach((col) => {
-        let value
-        if (typeof elem[col.dataIndex] === 'string' || typeof elem[col.dataIndex] === 'number') {
-          value = elem[col.dataIndex]
-        } else if (typeof elem[col.dataIndex] === 'object') {
-          value = elem[col.dataIndex]?.name || elem[col.dataIndex]?.id || 'n/d'
-        }
-        obj = { ...obj, [col.dataIndex]: value }
-      })
-      arr.push(obj)
-    })
-    // console.log(arr)
-    return arr
-  }
-
   getData = async () => {
     try {
       const response = await fetched(
@@ -45,9 +26,9 @@ class Store {
         'GET'
       )
       const res = await response.json()
-      console.log(res.value)
+      // console.log(res.value)
       this.data = res.value
-      this.dataSource = this.preparedData(res.value)
+      this.dataSource = preparedData(res.value, this.columns)
     } catch (error) {
       console.log(error)
     }

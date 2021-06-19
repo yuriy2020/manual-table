@@ -5,6 +5,7 @@ import { store } from '../store'
 import { observer } from 'mobx-react-lite'
 import { mock_data } from '../store/mock_data'
 import ManualTable from './ManualTable/ManualTable'
+import { preparedData } from '../utils/helpers'
 
 export const TableGrid = observer(() => {
   // ======== rowSelection objects indicates the need for row selection ==========
@@ -33,19 +34,19 @@ export const TableGrid = observer(() => {
 
   useEffect(() => {
     store.getData()
+    console.log(store.data)
   }, [])
 
   return (
-    <>
+    <div style={{margin:5}}>
       <Table
         onRow={onRowClick}
         rowSelection={{ ...rowSelection }} /// => checkboxes
         columns={store.columns}
-        dataSource={mock_data}
+        dataSource={preparedData(mock_data, store.columns)}
         size='small'
       />
-      {/* <ManualTable columns={store.columns} data={mock_data} select rowSelection={{ ...rowSelection }}/> */}
-    </>
+      <ManualTable columns={store.columns} data={preparedData(mock_data,store.columns)} select rowSelection={rowSelection} />
+    </div>
   )
 })
- 
