@@ -1,33 +1,37 @@
 import { makeAutoObservable } from 'mobx'
 import { fetched } from '../utils/fetched'
-import { preparedData}  from '../utils/helpers'
+import { preparedData } from '../utils/helpers'
 class Store {
   count = 3
-  data = []  // raw data from server
-  dataSource = []  // converted data
-  columns = [
-    { title: 'ID', dataIndex: 'id' },
-    { title: 'Наименование', dataIndex: 'name' },
-    { title: 'Описание', dataIndex: 'description' },
-    { title: 'Дата Создания', dataIndex: 'dateCreated' },
-    { title: 'Статус', dataIndex: 'incidentStatus' },
-    { title: 'Важность', dataIndex: 'incidentRelevance' },
-    { title: 'Автор', dataIndex: 'author' },
-  ]
+  data = [] // raw data from server
+  dataSource = [] // converted data
+  columns = []
 
   constructor() {
     makeAutoObservable(this)
   }
 
+  getColumns = async () => {
+    try {
+      const response = await fetched('http://localhost:5000/columns', 'GET')
+      const res = await response.json()
+      console.log(res)
+      this.columns = res
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   getData = async () => {
     try {
       const response = await fetched(
-        'http://localhost:36058/api/newinc/get?take=11&skip=0&sortDir=desc&sortBy=dateCreated&passportType=Postmodern',
+        'http://localhost:5000/data',
+        // 'http://localhost:36058/api/newinc/get?take=11&skip=0&sortDir=desc&sortBy=dateCreated&passportType=Postmodern',
         'GET'
       )
       const res = await response.json()
       // console.log(res.value)
-      this.data = res.value
+      this.data = res
       this.dataSource = preparedData(res.value, this.columns)
     } catch (error) {
       console.log(error)

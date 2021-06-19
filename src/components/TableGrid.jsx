@@ -34,19 +34,25 @@ export const TableGrid = observer(() => {
 
   useEffect(() => {
     store.getData()
+    store.getColumns()
     console.log(store.data)
   }, [])
 
   return (
-    <div style={{margin:5}}>
-      <Table
+    <div style={{ margin: 5 }}>
+      {/* <Table
         onRow={onRowClick}
         rowSelection={{ ...rowSelection }} /// => checkboxes
         columns={store.columns}
-        dataSource={preparedData(mock_data, store.columns)}
+        dataSource={store.data}
         size='small'
+      /> */}
+      <ManualTable
+        columns={store.columns}
+        data={store.data}
+        select
+        rowSelection={rowSelection}
       />
-      <ManualTable columns={store.columns} data={preparedData(mock_data,store.columns)} select rowSelection={rowSelection} />
     </div>
   )
 })

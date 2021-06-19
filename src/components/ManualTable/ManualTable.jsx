@@ -4,8 +4,12 @@ import './ManualTable.css'
 import { Checkbox } from '../Checkbox/Checkbox'
 
 const ManualTable = ({ columns, data, select, rowSelection }) => {
-  if (select) {
-    columns = [{ title: '[x]', dataIndex: '#chbx' }, ...columns]
+  const isDataCorrect = (d) => {
+    console.log(Array.isArray(d) && d.length > 0);
+    return Array.isArray(d) && d.length > 0
+  }
+  if (select && isDataCorrect(columns)) {
+    columns = [{ title: '[x]', dataIndex: '#chbx', wiidth: 20 }, ...columns]
   }
 
   const onMouseDown = (event) => {
@@ -20,6 +24,7 @@ const ManualTable = ({ columns, data, select, rowSelection }) => {
     }
 
     document.onmouseup = () => {
+      console.log({ id: parent.dataset.id, width: parent.style.width })
       document.onmousemove = null
       document.onmouseup = null
     }
@@ -27,9 +32,6 @@ const ManualTable = ({ columns, data, select, rowSelection }) => {
 
   console.log(rowSelection)
 
-  const isDataCorrect = (d) => {
-    return Array.isArray(d) && d.length > 0
-  }
 
   return (
     <table className='table'>
