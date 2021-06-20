@@ -9,17 +9,6 @@ import { preparedData } from '../utils/helpers'
 
 export const TableGrid = observer(() => {
   // ======== rowSelection objects indicates the need for row selection ==========
-  const rowSelection = {
-    onChange: (selectedRowKeys, selectedRows) => {
-      console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows)
-    },
-    onSelect: (record, selected, selectedRows) => {
-      console.log(record, selected, selectedRows)
-    },
-    onSelectAll: (selected, selectedRows, changeRows) => {
-      console.log(selected, selectedRows, changeRows)
-    },
-  }
 
   const onRowClick = (zz, rowIndex) => {
     return {
@@ -33,10 +22,12 @@ export const TableGrid = observer(() => {
   }
 
   useEffect(() => {
-    store.getData()
-    store.getColumns()
-    console.log(store.data)
+    store.getDataMX()
+    store.getColumnsMX()
   }, [])
+  useEffect(() => {
+    console.log(store.rowSelection.selectedRows)
+  }, [store.rowSelection.selectedRows])
 
   return (
     <div style={{ margin: 5 }}>
@@ -47,12 +38,7 @@ export const TableGrid = observer(() => {
         dataSource={store.data}
         size='small'
       /> */}
-      <ManualTable
-        columns={store.columns}
-        data={store.data}
-        select
-        rowSelection={rowSelection}
-      />
+      <ManualTable columns={store.columns} data={store.data} select rowSelection={store.rowSelection} />
     </div>
   )
 })
